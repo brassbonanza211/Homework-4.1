@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 
 public class LinkedSet implements Set {
 	private Node head;
@@ -9,6 +10,7 @@ public class LinkedSet implements Set {
 	}
 
 	private class Node {
+		public static final String data = null;
 		private Node next;
 
 		private Node(Object data) {
@@ -27,12 +29,19 @@ public class LinkedSet implements Set {
 		if (numberOfElements == 0) {
 			head = n;
 		}
-		if (current != n && current.next == null) {
-			for (int i = 0; i < numberOfElements; i++) {
-				current = current.next;
+		else {
+		for (int i = 0; i < numberOfElements; i++) {
+			if (current.data.equals(n.data)) {
+				return;
 			}
-			n = current.next;
+			current = current.next;
 		}
+		if (current.next == null) {
+			current.next = n;
+		}
+		//Add insert statement here
+		}
+		numberOfElements++;
 	}
 
 	@Override
@@ -91,5 +100,16 @@ public class LinkedSet implements Set {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public static void main(String[] args) {
+	Set set = new LinkedSet();
 
+	set.add("Apple");
+	set.add("Banana");
+	set.add("Cherry");
+	set.add("Dates");
+	set.add("Eggplant");
+
+	System.out.println(set.getSize());
+	}
 }
