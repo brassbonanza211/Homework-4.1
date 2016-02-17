@@ -55,17 +55,13 @@ public class LinkedSet implements Set {
 	@Override
 	public boolean contains(Object element) {
 		Node current = head;
-		if (current == element) {
-			return true;
+		{
+			while (current != null)
+				if (current.data.equals(element))
+					return true;
+			current = current.next;
 		}
-		while (current != element) {
-			current.next = current;
-			if (current.next == null) {
-				return false;
-			}
-			return true;
-		}
-		return true;
+		return false;
 	}
 
 	@Override
@@ -105,7 +101,7 @@ public class LinkedSet implements Set {
 			current = current.next;
 
 		}
-		
+
 	}
 
 	@Override
