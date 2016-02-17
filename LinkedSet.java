@@ -10,7 +10,7 @@ public class LinkedSet implements Set {
 	}
 
 	private class Node {
-		public static final String data = null;
+		public final String data = null;
 		private Node next;
 
 		private Node(Object data) {
@@ -28,18 +28,20 @@ public class LinkedSet implements Set {
 		Node current = head;
 		if (numberOfElements == 0) {
 			head = n;
-		}
-		else {
-		for (int i = 0; i < numberOfElements; i++) {
-			if (current.data.equals(n.data)) {
-				return;
+		} else {
+			for (int i = 0; i < numberOfElements; i++) {
+				// checking if the new item to be added is a duplicate
+				if (current.data.equals(n.data)) {
+					return;
+				}
+				// moving current to the next node in the linked list
+				current = current.next;
+				
+				// checking that current is pointing to the last node, so you can add this new item
+				if (current.next == null) {
+					current.next = n;
+				}
 			}
-			current = current.next;
-		}
-		if (current.next == null) {
-			current.next = n;
-		}
-		//Add insert statement here
 		}
 		numberOfElements++;
 	}
@@ -100,16 +102,16 @@ public class LinkedSet implements Set {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public static void main(String[] args) {
-	Set set = new LinkedSet();
+		Set set = new LinkedSet();
 
-	set.add("Apple");
-	set.add("Banana");
-	set.add("Cherry");
-	set.add("Dates");
-	set.add("Eggplant");
+		set.add("Apple");
+		set.add("Banana");
+		set.add("Cherry");
+		set.add("Dates");
+		set.add("Eggplant");
 
-	System.out.println(set.getSize());
+		System.out.println(set.getSize());
 	}
 }
