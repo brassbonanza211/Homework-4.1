@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertEquals;
+import LinkedList.Node;
 
 public class LinkedSet implements Set {
 	private Node head;
@@ -31,13 +31,13 @@ public class LinkedSet implements Set {
 		} else {
 			for (int i = 0; i < numberOfElements; i++) {
 				// checking if the new item to be added is a duplicate
+
 				if (current.data.equals(n.data)) {
 					return;
 				}
-				// moving current to the next node in the linked list
-				current = current.next;
-				
-				// checking that current is pointing to the last node, so you can add this new item
+
+				// checking that current is pointing to the last node, so you
+				// can add this new item
 				if (current.next == null) {
 					current.next = n;
 				}
@@ -75,20 +75,37 @@ public class LinkedSet implements Set {
 
 	@Override
 	public int getCapacity() {
-		// TODO Auto-generated method stub
-		return 0;
+		return numberOfElements;
 	}
 
 	@Override
 	public void remove(Object element) {
-		// TODO Auto-generated method stub
+		Node n = new Node(element);
+		int index = indexOf(element);
+		Node current = head;
+		Node previous = null;
+		if (index > -1) {
+			while (current.next != null) {
+				previous = current;
+				current = current.next;
+				numberOfElements--;
+				previous.next = current.next;
+			}
+		}
+
+		return;
 
 	}
 
 	@Override
 	public Set union(Set anotherSet) {
-		// TODO Auto-generated method stub
-		return null;
+		Node current = head;
+		while (current != null) {
+			System.out.print(" " + current.data + " ");
+			current = current.next;
+
+		}
+		
 	}
 
 	@Override
@@ -101,6 +118,26 @@ public class LinkedSet implements Set {
 	public Set difference(Set anotherSet) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int getLength() {
+		return numberOfElements;
+	}
+
+	// Returns the index of the first occurrence of the given value in the list,
+	// or -1 if the value is not found in the list.
+	public int indexOf(Object element) {
+		int index = 0;
+		Node current = head;
+		while (current != null) {
+			if (current.data == element) {
+				return index;
+			}
+			index++;
+			current = current.next;
+		}
+		return -1;
 	}
 
 	public static void main(String[] args) {
